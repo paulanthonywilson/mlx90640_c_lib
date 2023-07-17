@@ -19,11 +19,23 @@ int main(int argc, char *argv[]) {
   puts("VDD");
   printf("kVdd: %d, vdd25 %d", m.kVdd, m.vdd25);
   puts("");
-  puts("\nCPP params");
+  puts("\nCP params");
   printf("cpKv: %f, cpKta: %e\n", m.cpKv, m.cpKta);
   printf("cpAlpha[0]: %e, cpAlpha[1]: %e\n", m.cpAlpha[0], m.cpAlpha[1]);
   printf("offsetSP[0]: %d, offsetSP[1]: %d\n", m.cpOffset[0], m.cpOffset[1]); 
-  puts("");
+  puts("\n\n");
+
+  puts("Alpha");
+  printf("Alpha scale: %d\n\n", m.alphaScale); 
+  const char *sep = "Alphas:\n[\n";
+  for(int i = 0; i < MLX90640_PIXEL_NUM; i++) {
+    printf(sep);
+    printf("%d", m.alpha[i]);
+    sep = ",";
+  }
+  puts("\n]");
+
+
   return 0;
 }
 
