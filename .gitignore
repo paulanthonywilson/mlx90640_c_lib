@@ -1,2 +1,5 @@
 hello
 eeprom.bin
+all_frame.bin
+*.swp
+frames

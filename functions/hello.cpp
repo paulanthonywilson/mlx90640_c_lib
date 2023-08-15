@@ -16,7 +16,9 @@ void output_offsets(paramsMLX90640 *m);
 void output_ktas(paramsMLX90640 *m);
 void output_kvs(paramsMLX90640 *m);
 void output_cilc(paramsMLX90640 *m);
-void output_dodgy_pixels(paramsMLX90640 *wm);
+void output_dodgy_pixels(paramsMLX90640 *m);
+void output_resolution(paramsMLX90640 *m);
+
 
 
 void uint_array_out(uint16_t* arr, int size);
@@ -38,6 +40,8 @@ int main(int argc, char *argv[]) {
   output_ktas(&m);
   output_kvs(&m);
   output_cilc(&m);
+  output_dodgy_pixels(&m);
+  output_resolution(&m);
 
   return 0;
 }
@@ -98,6 +102,23 @@ void output_kvs(paramsMLX90640 *m){
   printf("kvScale: %d\n\n", m->kvScale);
   int8_array_out(m->kv, PIX_COUNT);
 }
+
+void output_dodgy_pixels(paramsMLX90640 *m) {
+  puts("\nBroken:");
+  for(int i = 0; i < 5; i++){
+   printf("%d: %d\n", i, m->brokenPixels[i]);
+  }
+  puts("\nOutlier::");
+  for(int i = 0; i < 5; i++){
+   printf("%d: %d\n", i, m->outlierPixels[i]);
+  }
+}
+
+void output_resolution(paramsMLX90640 *m){
+  puts("\nResolution:");
+  printf("resolutionEE: %d\n\n", m->resolutionEE);
+}
+
 
 void dump_eeprom_to_file(uint16_t *eeprom){
   uint16_t reverse_end;
